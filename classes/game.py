@@ -16,8 +16,7 @@ class Game:
                 self.dealer_hand.add_card(self.deck.deal())
             print("Your hand is:")
             self.player_hand.display()
-            print()
-            print("Dealer's hand is:")
+            print("\nDealer's hand is:")
             self.dealer_hand.display()
 
             game_over = False
