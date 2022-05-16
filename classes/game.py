@@ -28,6 +28,9 @@ class Game:
                     self.show_blackjack_results(
                         player_has_blackjack, dealer_has_blackjack)
                     continue
+                if self.player_is_over():
+                    print("You have lost!")
+                    game_over = True
 
                 choice = input("Please choose [Hit / Stick] ").lower()
                 while choice not in ["h", "s", "hit", "stick"]:
@@ -37,27 +40,23 @@ class Game:
                 if choice in ['hit', 'h']:
                     self.player_hand.add_card(self.deck.deal())
                     self.player_hand.display()
-
-                if self.player_is_over():
-                    print("You have lost!")
-                    has_won = True
                 else:
                     print("Final Results")
                     print("Your hand:", self.player_hand.get_value())
                     print("Dealer's hand:", self.dealer_hand.get_value())
                     if self.player_hand.get_value() > self.dealer_hand.get_value():
                         print("You Win!")
+                        game_over = True
                     else:
                         print("Dealer Wins!")
-                        has_won = True
-                again = input("Play Again? [Y/N] ")
-                while again.lower() not in ["y", "n"]:
-                    again = input("Please enter Y or N ")
-                if again.lower() == "n":
-                    print("Thanks for playing!")
-                    playing = False
-                else:
-                    has_won = False
+                        game_over = True
+
+            again = input("Play Again? [Y/N] ")
+            while again.lower() not in ["y", "n"]:
+                again = input("Please enter Y or N ")
+            if again.lower() == "n":
+                print("Thanks for playing!")
+                playing = False
 
     def check_for_blackjack(self):
         player = False
